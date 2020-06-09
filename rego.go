@@ -1,7 +1,6 @@
 package rego
 
 import (
-	"fmt"
 	"net/http"
 	"sync"
 )
@@ -88,18 +87,17 @@ func (engine *Engine) HandlerHTTPRequest(c *Context) {
 		con,buf,err:=hijacker.Hijack()
 		if err != nil {
 			CheckErr(err,"get the connection is failed")
-			con.Close()
+			_ = con.Close()
 		}
 		engine.Conn=con
 		engine.Buf=buf
 		engine.handleConnection(c, config)
 		if err != nil {
 			CheckErr(err,"get the connection is failed")
-			con.Close()
+			_ = con.Close()
 		}
 	} else {
 		for _, v := range AllMaps {
-			fmt.Println("2")
 			if v.httpMethod != httpMethod {
 				continue
 			}

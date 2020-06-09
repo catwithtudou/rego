@@ -85,10 +85,10 @@ func (this *WSCon)ReadIframe(wsConfig WSConfig)(data []byte,err error){
 
 	FIN := opcodeByte[0] >> 7
 	RSV1 := opcodeByte[0] >> 6 & 1
-	RSV2 := opcodeByte[0] >> 5 & 1
-	RSV3 := opcodeByte[0] >> 4 & 1
-	if RSV1==1 || RSV2==1 || RSV3==1{
-		wsConfig.WSClose(this)
+		RSV2 := opcodeByte[0] >> 5 & 1
+		RSV3 := opcodeByte[0] >> 4 & 1
+		if RSV1==1 || RSV2==1 || RSV3==1{
+			wsConfig.WSClose(this)
 		return
 	}
 
